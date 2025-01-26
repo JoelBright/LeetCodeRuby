@@ -13,9 +13,7 @@ RSpec.describe 'flatten' do
       nodes[i + 1].prev = node if i < nodes.length - 1
 
       # Add child if specified
-      if children[i]
-        node.child = create_linked_list(children[i])
-      end
+      node.child = create_linked_list(children[i]) if children[i]
     end
 
     nodes.first
@@ -46,8 +44,8 @@ RSpec.describe 'flatten' do
     #                   |
     #                   4 -> 5
     head = create_linked_list([1, 2, 3], {
-      1 => [4, 5]
-    })
+                                1 => [4, 5]
+                              })
 
     result = flatten(head)
     expect(list_to_array(result)).to eq([1, 2, 4, 5, 3])
@@ -60,9 +58,9 @@ RSpec.describe 'flatten' do
     #                        |
     #                        7 -> 8
     head = create_linked_list([1, 2, 3, 4], {
-      1 => [5, 6],
-      5 => [7, 8]
-    })
+                                1 => [5, 6],
+                                5 => [7, 8]
+                              })
 
     result = flatten(head)
     expect(list_to_array(result)).to eq([1, 2, 5, 6, 7, 8, 3, 4])
